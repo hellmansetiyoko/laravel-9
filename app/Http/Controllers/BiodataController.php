@@ -21,7 +21,7 @@ class BiodataController extends Controller
     public function update(Request $request, Biodata $biodata)
     {
         $request->validate([
-            'city' => 'required',
+            'city_of_birth' => 'required',
         ]);
         $biodata->update(request()->all());
     }

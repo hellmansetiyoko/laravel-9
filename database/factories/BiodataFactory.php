@@ -19,6 +19,9 @@ class BiodataFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'nik' => $this->faker->nik(),
+            'dob' => $this->faker->date(),
+            'city_of_birth' => $this->faker->city(),
         ];
     }
 }

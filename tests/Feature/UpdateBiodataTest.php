@@ -24,14 +24,14 @@ class UpdateBiodataTest extends TestCase
     public function test_biodata_can_updated()
     {
         // $this->login();
-        $response = $this->patch($this->biodata->path(), ['city' => 'new city']);
-        $this->assertEquals('new city', Biodata::first()->city);
+        $response = $this->patch($this->biodata->path(), ['city_of_birth' => 'new city']);
+        $this->assertEquals('new city', Biodata::first()->city_of_birth);
     }
 
     public function test_field_is_require()
     {
-        $this->validatedInputs('city', ['city' => '']);
-        $this->validatedInputs('city', ['city' => '']);
+        $this->validatedInputs('city_of_birth', ['city_of_birth' => '']);
+        $this->validatedInputs('city_of_birth', ['city_of_birth' => '']);
     }
 
     public function validatedInputs($field, array $overides)

@@ -28,7 +28,7 @@ class BiodataTest extends TestCase
     public function test_biodata_can_be_update()
     {
         $biodata = create(Biodata::class);
-        $biodata->update(['city' => 'NEW CITY']);
-        $this->assertEquals('NEW CITY', Biodata::first()->city);
+        $biodata->update(['city_of_birth' => 'NEW CITY']);
+        $this->assertEquals('NEW CITY', Biodata::first()->city_of_birth);
     }
 }

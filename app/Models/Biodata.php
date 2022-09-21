@@ -9,7 +9,11 @@ class Biodata extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'city'];
+    protected $fillable = ['user_id', 'nik', 'dob', 'city_of_birth', 'address'];
+
+    protected $casts = [
+        'dob' => 'date',
+    ];
 
     public function owner()
     {
