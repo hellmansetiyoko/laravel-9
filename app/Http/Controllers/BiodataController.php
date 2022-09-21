@@ -12,14 +12,17 @@ class BiodataController extends Controller
     {
         $this->middleware(['auth']);
     }
-    public function index(Request $request)
+
+    public function index()
     {
         $biodata = Biodata::firstOrCreate(['user_id' => Auth::id()]);
-        if ($request->isMethod('patch')) {
-            $request->validate([
-                'city' => 'required',
-            ]);
-            $biodata->update(request()->all());
-        }
+    }
+
+    public function update(Request $request, Biodata $biodata)
+    {
+        $request->validate([
+            'city' => 'required',
+        ]);
+        $biodata->update(request()->all());
     }
 }

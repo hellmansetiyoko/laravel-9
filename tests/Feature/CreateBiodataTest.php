@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Biodata;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 
 class CreateBiodataTest extends TestCase
@@ -19,8 +18,8 @@ class CreateBiodataTest extends TestCase
 
     public function test_auth_user_can_create_biodata()
     {
-        $response = $this->actingAs($user = User::factory()->create())
-            ->get('/biodata');
-        $this->assertEquals($user->name, Biodata::first()->owner->name);
+        $this->login();
+        $response = $this->get('/biodata');
+        $this->assertEquals(Auth::user()->name, Biodata::first()->owner->name);
     }
 }
