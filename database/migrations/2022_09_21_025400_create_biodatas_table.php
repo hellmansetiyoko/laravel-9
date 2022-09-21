@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id')->constrained();
+            $table->string('city')->nullable();
             $table->timestamps();
         });
     }

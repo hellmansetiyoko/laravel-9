@@ -18,9 +18,16 @@ class BiodataTest extends TestCase
 
     public function test_biodata_is_one_and_only_for_a_user()
     {
-        $biodata = Biodata::factory()->make();
+        $biodata = Biodata::factory()->create();
         Biodata::firstOrCreate(['user_id' => User::first()->id]);
         Biodata::firstOrCreate(['user_id' => User::first()->id]);
         $this->assertCount(1, Biodata::all());
+    }
+
+    public function test_biodata_can_be_update()
+    {
+        $biodata = Biodata::factory()->create();
+        $biodata->update(['city' => 'NEW CITY']);
+        $this->assertEquals('NEW CITY', Biodata::first()->city);
     }
 }

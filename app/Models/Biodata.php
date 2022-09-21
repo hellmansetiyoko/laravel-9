@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Biodata extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'city'];
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
