@@ -15,7 +15,9 @@ class BiodataController extends Controller
 
     public function index()
     {
-        $biodata = Biodata::firstOrCreate(['user_id' => Auth::id()]);
+        $biodata = Biodata::firstOrNew(['user_id' => Auth::id()]);
+
+        return $biodata;
     }
 
     public function update(Request $request, Biodata $biodata)
@@ -24,5 +26,14 @@ class BiodataController extends Controller
             'city_of_birth' => 'required',
         ]);
         $biodata->update(request()->all());
+
+        return redirect('/biodata');
+    }
+
+    public function store(Request $request)
+    {
+        $biodata = Biodata::create($request->all());
+
+        return redirect('/biodata', 201);
     }
 }

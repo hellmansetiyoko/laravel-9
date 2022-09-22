@@ -23,14 +23,15 @@ class UpdateBiodataTest extends TestCase
 
     public function test_biodata_can_updated()
     {
-        // $this->login();
-        $response = $this->patch($this->biodata->path(), ['city_of_birth' => 'new city']);
-        $this->assertEquals('new city', Biodata::first()->city_of_birth);
+        $response = $this->patch(
+            route('biodata.update', ['biodata' => $this->biodata->id]),
+            ['city_of_birth' => 'new city']
+        );
+        $response->assertRedirect(route('biodata'));
     }
 
     public function test_field_is_require()
     {
-        $this->validatedInputs('city_of_birth', ['city_of_birth' => '']);
         $this->validatedInputs('city_of_birth', ['city_of_birth' => '']);
     }
 
@@ -39,7 +40,10 @@ class UpdateBiodataTest extends TestCase
         $attributes = Biodata::factory()->make(array_merge([
             'user_id' => Auth::id(),
         ], $overides));
-        $response = $this->patch($this->biodata->path(), $attributes->toArray())
-            ->assertSessionHasErrors($field);
+        $response = $this->patch(
+            route('biodata.update', ['biodata' => $this->biodata->id]),
+            $attributes->toArray()
+        );
+        $response->assertSessionHasErrors($field);
     }
 }

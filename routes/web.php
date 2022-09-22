@@ -23,5 +23,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-Route::get('/biodata', [BiodataController::class, 'index']);
-Route::patch('/biodata/{biodata}/update', [BiodataController::class, 'update'])->name('biodata.update');
+
+Route::controller(BiodataController::class)->group(function () {
+    Route::get('/biodata', 'index')->name('biodata');
+    Route::post('/biodata', 'store')->name('biodata.store');
+    Route::patch('/biodata/{biodata}/update', 'update')->name('biodata.update');
+});

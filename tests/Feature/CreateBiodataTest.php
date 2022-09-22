@@ -13,13 +13,15 @@ class CreateBiodataTest extends TestCase
 
     public function test_guest_cannot_create_biodata()
     {
-        $response = $this->get('/biodata')->assertRedirect('/login');
+        $response = $this->post(route('biodata.store'))
+            ->assertRedirect('/login');
     }
 
     public function test_auth_user_can_create_biodata()
     {
         $this->login();
-        $response = $this->get('/biodata');
-        $this->assertEquals(Auth::user()->name, Biodata::first()->owner->name);
+        $biodata = make(Biodata::class, ['user_id' => Auth::id()])->toArray();
+        $response = $this->post(route('biodata.store'), $biodata)
+            ->assertCreated();
     }
 }
