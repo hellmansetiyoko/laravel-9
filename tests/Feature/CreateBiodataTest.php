@@ -22,6 +22,6 @@ class CreateBiodataTest extends TestCase
         $this->login();
         $biodata = make(Biodata::class, ['user_id' => Auth::id()])->toArray();
         $response = $this->post(route('biodata.store'), $biodata)
-            ->assertCreated();
+            ->assertRedirect(route('biodata'));
     }
 }

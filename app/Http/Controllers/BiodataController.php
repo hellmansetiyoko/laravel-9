@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBiodataRequest;
 use App\Models\Biodata;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BiodataController extends Controller
@@ -20,20 +20,17 @@ class BiodataController extends Controller
         return $biodata;
     }
 
-    public function update(Request $request, Biodata $biodata)
+    public function update(StoreBiodataRequest $request, Biodata $biodata)
     {
-        $request->validate([
-            'city_of_birth' => 'required',
-        ]);
         $biodata->update(request()->all());
 
         return redirect('/biodata');
     }
 
-    public function store(Request $request)
+    public function store(StoreBiodataRequest $request)
     {
         $biodata = Biodata::create($request->all());
 
-        return redirect('/biodata', 201);
+        return redirect(route('biodata'));
     }
 }

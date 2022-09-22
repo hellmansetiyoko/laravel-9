@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BiodataController;
+use App\Models\Biodata;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::controller(BiodataController::class)->group(function () {
-    Route::get('/biodata', 'index')->name('biodata');
-    Route::post('/biodata', 'store')->name('biodata.store');
+    Route::get('/biodata', 'index')->name('biodata')->can('update', Biodata::class);
+    Route::post('/biodata', 'store')->name('biodata.store')->can('create', Biodata::class);
     Route::patch('/biodata/{biodata}/update', 'update')->name('biodata.update');
 });
